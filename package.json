@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/react": "^18.3.12"
+  },
+  "dependencies": {
+    "@moovio/moov-js": "^0.0.16"
+  }
+}
