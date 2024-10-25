@@ -3,24 +3,30 @@ import { Label } from "./Label";
 import "./PercentageSlider.css";
 
 interface PercentageSliderProps {
-  onPercentageChange: (value: number) => void;
-  labelText?: string; // Add new optional prop
-}
-
+    onPercentageChange: (value: number) => void;
+    labelText: string;
+    value?: number;  // Add this if not already present
+  }
+  
 export const PercentageSlider = ({ 
   onPercentageChange, 
-  labelText = "E%" 
+  labelText = "E%",
+  value = 0.25
 }: PercentageSliderProps) => {
-  const [value, setValue] = useState(0);
+  const [internalValue, setInternalValue] = useState(value);
   const sliderRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setInternalValue(value);
+  }, [value]);
 
   const updateValue = (clientX: number) => {
     if (sliderRef.current) {
       const { left, width } = sliderRef.current.getBoundingClientRect();
       let newValue = ((clientX - left) / width) * 3;
       newValue = Math.max(0, Math.min(3, newValue));
-      setValue(newValue);
+      setInternalValue(newValue);
       onPercentageChange(newValue);
     }
   };
@@ -42,10 +48,10 @@ export const PercentageSlider = ({
 
   useEffect(() => {
     if (thumbRef.current && sliderRef.current) {
-      const percentage = (value / 3) * 100;
+      const percentage = (internalValue / 3) * 100;
       thumbRef.current.style.left = `${percentage}%`;
     }
-  }, [value]);
+  }, [internalValue]);
 
   return (
     <div className="slider-container">
@@ -54,7 +60,7 @@ export const PercentageSlider = ({
           {labelText}
         </Label>
         <div className="percentage-display">
-          {value.toFixed(2)}%
+          {internalValue.toFixed(2)}%
         </div>
       </div>
       <div 
@@ -64,7 +70,7 @@ export const PercentageSlider = ({
       >
         <div 
           className="slider-fill"
-          style={{ width: `${(value / 3) * 100}%` }}
+          style={{ width: `${(internalValue / 3) * 100}%` }}
         />
         <div
           ref={thumbRef}

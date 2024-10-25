@@ -1,4 +1,5 @@
-'use client'
+import { Moov } from '@moovio/moov-js';
+import { processPayment } from '../utils/processPayment.ts'
 
 import { useState, useEffect } from 'react'
 import './Button.css'
@@ -6,17 +7,30 @@ import './Button.css'
 interface FancyBuyButtonProps {
   value1: number
   value2: number
-  cost: number
+  cost: number,
+  moov: Moov
 }
 
-export default function Component({ value1 = 0, value2 = 0, cost = 0 }: FancyBuyButtonProps) {
+export default function Component({ value1 = 0, value2 = 0, cost = 0, moov }: FancyBuyButtonProps) {
   const [isClicked, setIsClicked] = useState(false)
   const average = (value1 + value2) / 2
-  const totalCost = cost + (cost * (value1 + value2) / 100)
+  const totalCost = cost
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setIsClicked(true)
-  }
+
+    try {
+      await processPayment({
+        user1Percentage: value1,
+        user2Percentage: value2,
+        totalAmount: cost,
+        moov
+      });
+    } catch (error) {
+      console.error('Payment failed:', error);
+      // Handle error (e.g., show error message to user)
+    }
+  };  
 
   useEffect(() => {
     if (isClicked) {
@@ -32,7 +46,7 @@ export default function Component({ value1 = 0, value2 = 0, cost = 0 }: FancyBuy
         className={`fancy-button ${isClicked ? 'clicked' : ''}`}
       >
         <span className="button-content">
-          Buy Now - ${totalCost.toFixed(2)}
+          Buy Now - ${totalCost.toFixed(2)} (${(totalCost * 0.03).toFixed(2)} shared)
         </span>
         <span 
           className={`button-overlay ${isClicked ? 'clicked' : ''}`}
