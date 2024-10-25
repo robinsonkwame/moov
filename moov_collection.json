@@ -1,0 +1,4097 @@
+{
+	"info": {
+		"_postman_id": "b2936044-ef63-4e19-b841-fcda7b5db256",
+		"name": "Moov",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35402569",
+		"_collection_link": "https://www.postman.com/moovfin/moov/collection/ofgzi6a/moov?action=share&source=collection_link&creator=35402569"
+	},
+	"item": [
+		{
+			"name": "Workflow",
+			"item": [
+				{
+					"name": "Create OAuth2 Token (Basic Auth) Business",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create OAuth token basic auth\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"var access_token = jsonData.access_token;",
+									"console.log(access_token)",
+									"pm.environment.set(\"accessToken\", jsonData.access_token);",
+									"console.log(pm.environment.get(\"accessToken\"));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/ping.read,/accounts/{{accountID}}/profile.read,/accounts/{{accountID}}/profile.write,/accounts/{{accountID}}/capabilities.read,/accounts/{{accountID}}/payment-methods.read,/account/{{accountID}}/transfers.read,/account/{{accountID}}/transfers.write",
+									"description": "View full list of scopes here: https://docs.moov.io/guides/developer-tools/api-keys/scopes/",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not supported or used in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Create OAuth2 Token (Basic Auth) Individual",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create OAuth token basic auth\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"var access_token = jsonData.access_token;",
+									"console.log(access_token)",
+									"pm.environment.set(\"accessToken\", jsonData.access_token);",
+									"console.log(pm.environment.get(\"accessToken\"));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/ping.read,/accounts/{{individualAccountID}}/profile.read,/accounts/{{individualAccountID}}/profile.write,/accounts/{{individualAccountID}}/capabilities.read,/accounts/{{individualAccountID}}/payment-methods.read,/account/{{individualAccountID}}/transfers.read,/account/{{individualAccountID}}/transfers.write",
+									"description": "View full list of scopes here: https://docs.moov.io/guides/developer-tools/api-keys/scopes/",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not supported or used in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "ping Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ping\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basePath}}/ping",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Capabilities Business",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET list capabilities\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{accountID}}/capabilities",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{accountID}}",
+								"capabilities"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "List Payment Methods Business",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET payment methods\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const body = pm.response.json();",
+									"",
+									"if (body.length) {",
+									"    pm.collectionVariables.set(\"paymentMethodID1\", body[0].paymentMethodID);    ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{businessAccountID}}/payment-methods",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{businessAccountID}}",
+								"payment-methods"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer options Source Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST transfer-options 1\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const resp = pm.response.json();",
+									"",
+									"if (resp.sourceOptions) {",
+									"    resp.sourceOptions.forEach(option => {",
+									"        if (option.paymentMethodType === \"ach-debit-fund\") {",
+									"            pm.collectionVariables.set(\"paymentMethodID1\", option.paymentMethodID);",
+									"        }",
+									"    })",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": {\n        \"value\": 10,\n        \"currency\": \"USD\"\n    },\n    \"source\": {\n        \"accountID\": {{individualAccountID}}\n    }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/transfer-options",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"transfer-options"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer options Destination Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST transfer-options 2\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const resp = pm.response.json();",
+									"",
+									"if (resp.destinationOptions) {",
+									"    resp.destinationOptions.forEach(option => {",
+									"        if (option.paymentMethodType === \"ach-credit-standard\") {",
+									"            pm.collectionVariables.set(\"paymentMethodID2\", option.paymentMethodID);",
+									"        }",
+									"    })",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"source\": {\n    \"paymentMethodID\": \"{{paymentMethodID1}}\"\n  },\n  \"destination\": {\n      \"accountID\": \"c9773fcb-7019-4cfa-9a8c-1964e435d01a\"\n  },\n  \"amount\": {\n    \"currency\": \"USD\",\n    \"value\": 12604\n  }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/transfer-options",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"transfer-options"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Create transfer Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create a transfer\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Wait-For",
+								"value": "rail-response",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": {\n        \"value\": 10,\n        \"currency\": \"USD\"\n    },\n    \"source\": {\n        \"paymentMethodID\": \"9fb18877-6175-44df-abdd-520adf0651d2\",\n        \"transferID\": {{guid}}\n    },\n    \"destination\": {\n        \"paymentMethodID\": {{payMethodID4-achDebitCollect}}\n    }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/transfers",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"transfers"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": [
+						{
+							"name": "card payment > moov wallet",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Origin",
+										"value": "{{baseUrl}}",
+										"type": "text"
+									},
+									{
+										"key": "Referer",
+										"value": "{{baseUrl}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Account-ID",
+										"value": "{{accountID}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Idempotency-Key",
+										"value": "{{$guid}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Wait-For",
+										"value": "rail-response",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": {\n        \"value\": 100,\n        \"currency\": \"USD\"\n    },\n    \"source\": {\n        \"paymentMethodID\": \"cf58c2b7-dd45-44f5-a2cd-3d56301e4d02\"\n    },\n    \"destination\": {\n        \"paymentMethodID\": \"4b5bf484-b650-4667-ac96-8311db2be2a9\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{basePath}}/transfers",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"transfers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 25 Aug 2023 19:48:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "https://www.example.com"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-store, must-revalidate, max-age=0"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "default-src 'none'; connect-src 'self' https://formspree.io/xeqvwyeq https://o984155.ingest.sentry.io https://www.google-analytics.com/g/collect; font-src 'self' data:; img-src 'self' blob: data:; frame-src https://www.google.com/recaptcha/; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/releases/ https://www.googletagmanager.com; style-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+								},
+								{
+									"key": "permissions-policy",
+									"value": "sync-xhr=(self),fullscreen=(),payment=(),accelerometer=(),autoplay=(),camera=(),encrypted-media=(),geolocation=(),gyroscope=(),magnetometer=(),microphone=(),midi=(),picture-in-picture=(),publickey-credentials-get=(),screen-wake-lock=(),usb=(),xr-spatial-tracking=()"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "DENY"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none;"
+								},
+								{
+									"key": "x-request-id",
+									"value": "d0ddbd98-a2ad-42b9-881e-7433e4ce71e0"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "7fc65b01b9214de4-MCI"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transferID\": \"d0b406c3-7a0c-4678-880f-094ddaa01792\",\n    \"createdOn\": \"2023-08-25T19:48:57Z\",\n    \"status\": \"pending\",\n    \"amount\": {\n        \"currency\": \"USD\",\n        \"value\": 100\n    },\n    \"facilitatorFee\": {\n        \"total\": 0\n    },\n    \"moovFee\": 32,\n    \"source\": {\n        \"paymentMethodID\": \"f9722a41-f732-4337-87ef-c22601763636\",\n        \"paymentMethodType\": \"card-payment\",\n        \"account\": {\n            \"accountID\": \"5e0f8504-27ea-4677-96b5-b0d52c3e9efe\",\n            \"email\": \"ian.valdez@example.com\",\n            \"displayName\": \"Ian Valdez\"\n        },\n        \"card\": {\n            \"cardID\": \"83ecf582-e2c7-461e-a0e9-7ff32ec0837f\",\n            \"fingerprint\": \"820032e4280014eef4b494f967cdb5b012020aea348f8929d322ec7ae2f9d2df\",\n            \"brand\": \"Visa\",\n            \"cardType\": \"credit\",\n            \"lastFourCardNumber\": \"1111\",\n            \"bin\": \"411111\",\n            \"expiration\": {\n                \"month\": \"01\",\n                \"year\": \"29\"\n            },\n            \"holderName\": \"Ian Valdez\",\n            \"billingAddress\": {\n                \"addressLine1\": \"123 Money Street\",\n                \"city\": \"Mooville\",\n                \"stateOrProvince\": \"IA\",\n                \"postalCode\": \"74145\",\n                \"country\": \"US\"\n            },\n            \"cardVerification\": {\n                \"cvv\": \"unavailable\",\n                \"addressLine1\": \"unavailable\",\n                \"postalCode\": \"unavailable\"\n            },\n            \"issuer\": \"JPMORGAN CHASE BANK, N.A.\",\n            \"issuerCountry\": \"US\",\n            \"cardAccountUpdater\": {}\n        },\n        \"cardDetails\": {\n            \"status\": \"confirmed\"\n        }\n    },\n    \"destination\": {\n        \"paymentMethodID\": \"4b5bf484-b650-4667-ac96-8311db2be2a9\",\n        \"paymentMethodType\": \"moov-wallet\",\n        \"account\": {\n            \"accountID\": \"bb9af805-c106-4e0e-971d-365cb02c66cf\",\n            \"email\": \"braelyn.medina@example.com\",\n            \"displayName\": \"ACT Manufacturing Inc.\"\n        },\n        \"wallet\": {\n            \"walletID\": \"032ea439-b97f-4bf0-a606-a61948e7dd83\"\n        }\n    }\n}"
+						},
+						{
+							"name": "ach debit fund > moov wallet",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Origin",
+										"value": "{{baseUrl}}",
+										"type": "text"
+									},
+									{
+										"key": "Referer",
+										"value": "{{baseUrl}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Account-ID",
+										"value": "{{accountID}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-Idempotency-Key",
+										"value": "{{$guid}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Wait-For",
+										"value": "rail-response",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": {\n        \"value\": 100,\n        \"currency\": \"USD\"\n    },\n    \"source\": {\n        \"paymentMethodID\": \"cf58c2b7-dd45-44f5-a2cd-3d56301e4d02\"\n    },\n    \"destination\": {\n        \"paymentMethodID\": \"9c58e1ce-1288-417c-9d6b-52d4925a25ff\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{basePath}}/transfers",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"transfers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 25 Aug 2023 19:56:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "https://www.example.com"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-store, must-revalidate, max-age=0"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "default-src 'none'; connect-src 'self' https://formspree.io/xeqvwyeq https://o984155.ingest.sentry.io https://www.google-analytics.com/g/collect; font-src 'self' data:; img-src 'self' blob: data:; frame-src https://www.google.com/recaptcha/; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/releases/ https://www.googletagmanager.com; style-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+								},
+								{
+									"key": "permissions-policy",
+									"value": "sync-xhr=(self),fullscreen=(),payment=(),accelerometer=(),autoplay=(),camera=(),encrypted-media=(),geolocation=(),gyroscope=(),magnetometer=(),microphone=(),midi=(),picture-in-picture=(),publickey-credentials-get=(),screen-wake-lock=(),usb=(),xr-spatial-tracking=()"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "DENY"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none;"
+								},
+								{
+									"key": "x-request-id",
+									"value": "6ee15c78-b171-40f0-8303-ca73c86c512d"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "7fc6655a99f04de4-MCI"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transferID\": \"24fbb612-2dd8-429f-8a24-e74ad17a3ac2\",\n    \"createdOn\": \"2023-08-25T19:56:01Z\",\n    \"status\": \"pending\",\n    \"amount\": {\n        \"currency\": \"USD\",\n        \"value\": 100\n    },\n    \"facilitatorFee\": {\n        \"total\": 0\n    },\n    \"source\": {\n        \"paymentMethodID\": \"cf58c2b7-dd45-44f5-a2cd-3d56301e4d02\",\n        \"paymentMethodType\": \"ach-debit-fund\",\n        \"account\": {\n            \"accountID\": \"bb9af805-c106-4e0e-971d-365cb02c66cf\",\n            \"email\": \"braelyn.medina@example.com\",\n            \"displayName\": \"ACT Manufacturing Inc.\"\n        },\n        \"bankAccount\": {\n            \"bankAccountID\": \"a9677bcc-c846-4d3a-b32d-873f3511bcae\",\n            \"fingerprint\": \"8c7153013498ce721d95fd5677692572daae4a93faa5f7d286f623eff95957e2\",\n            \"status\": \"verified\",\n            \"holderName\": \"ACT Manufacturing Inc.\",\n            \"holderType\": \"business\",\n            \"bankName\": \"VERIDIAN CREDIT UNION\",\n            \"bankAccountType\": \"checking\",\n            \"routingNumber\": \"273976369\",\n            \"lastFourAccountNumber\": \"3910\"\n        },\n        \"achDetails\": {\n            \"status\": \"initiated\",\n            \"traceNumber\": \"273976365834775\",\n            \"debitHoldPeriod\": \"2-days\"\n        }\n    },\n    \"destination\": {\n        \"paymentMethodID\": \"9c58e1ce-1288-417c-9d6b-52d4925a25ff\",\n        \"paymentMethodType\": \"moov-wallet\",\n        \"account\": {\n            \"accountID\": \"5e0f8504-27ea-4677-96b5-b0d52c3e9efe\",\n            \"email\": \"ian.valdez@example.com\",\n            \"displayName\": \"Ian Valdez\"\n        },\n        \"wallet\": {\n            \"walletID\": \"3bc92e99-b442-4a6d-bed7-63ada6ad5229\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "OAuth2 Tokens",
+			"item": [
+				{
+					"name": "Create OAuth2 Token (Body)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create OAuth token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/ping.read",
+									"description": "View full list of scopes here: https://docs.moov.io/guides/developer-tools/api-keys/scopes/",
+									"type": "text"
+								},
+								{
+									"key": "Origin",
+									"value": "http://local.moov.io",
+									"description": "Audiences are not used or supported in t",
+									"type": "text"
+								},
+								{
+									"key": "Referrer",
+									"value": "http://local.moov.io",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Create OAuth2 Token (Basic Auth)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create OAuth token basic auth\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"var access_token = jsonData.access_token;",
+									"console.log(access_token)",
+									"pm.environment.set(\"accessToken\", jsonData.access_token);",
+									"console.log(pm.environment.get(\"accessToken\"));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/ping.read,/accounts/{{accountID}}/profile.read,/accounts/{{accountID}}/profile.write,/accounts/{{accountID}}/payment-methods.read,/account/{{accountID}}/transfers.read,/account/{{accountID}}/transfers.write",
+									"description": "View full list of scopes here: https://docs.moov.io/guides/developer-tools/api-keys/scopes/",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not supported or used in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "ping",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ping\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basePath}}/ping",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Create Token - account.write",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Account Write Token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts.write",
+									"description": "View full list of scopes here: https://docs.moov.io/guides/developer-tools/api-keys/scopes/",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Terms of Service Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET tos-token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"tosToken\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{basePath}}/tos-token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"tos-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Individual Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create Individual account\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"individualAccountID\", pm.response.json().accountID)",
+									"pm.collectionVariables.set(\"foreignID\", pm.response.json().foreignID)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountType\": \"individual\",\n  \"foreignID\": \"{{$guid}}\",\n  \"profile\": {\n    \"individual\": {\n      \"name\": {\n        \"firstName\": \"Amanda\",\n        \"middleName\": \"\",\n        \"lastName\": \"Yang\",\n        \"suffix\": \"\"\n      },\n      \"phone\": {\n        \"number\": \"818-555-3322\",\n        \"countryCode\": \"1\"\n      },\n      \"email\": \"amanda@moov.io\",\n      \"address\": {\n        \"addressLine1\": \"123 Main Street\",\n        \"addressLine2\": \"Apt 302\",\n        \"city\": \"Cedar Falls\",\n        \"stateOrProvince\": \"IA\",\n        \"postalCode\": \"80301\",\n        \"country\": \"US\"\n      },\n      \"birthDate\": {\n        \"day\": 9,\n        \"month\": 11,\n        \"year\": 1989\n      },\n      \"governmentID\": {\n        \"ssn\": {\n          \"full\": \"654987987\"\n        }\n      }\n    }\n  },\n  \"metadata\": {\n    \"twitter\": \"amanda\",\n    \"demographic\": \"clever\"\n  },\n  \"termsOfService\": {\n    \"token\": \"{{tosToken}}\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Business Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create Business account\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"businessAccountID\", pm.response.json().accountID)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountType\": \"business\",\n  \"profile\": {\n    \"business\": {\n      \"website\": \"moov.io\",\n      \"legalBusinessName\": \"A.P. Finance Limited\",\n      \"businessType\": \"llc\",\n      \"address\": {\n        \"addressLine1\": \"1822 N 5th St.\",\n        \"addressLine2\": \" - 88 Brompton Road\",\n        \"city\": \"Henryetta\",\n        \"stateOrProvince\": \"OK\",\n        \"postalCode\": \"74145\",\n        \"country\": \"US\"\n      },\n      \"phone\": {\n        \"number\": \"818-555-1212\",\n        \"countryCode\": \"1\"\n      },\n      \"email\": \"amanda@classbooker.dev\",\n      \"description\": \"Changing the world\",\n      \"taxID\": {\n        \"ein\": {\n          \"number\": \"12-3456789\"\n        }\n      },\n      \"industryCodes\": {\n        \"naics\": \"0000\",\n        \"sic\": \"0000\",\n        \"mcc\": \"0000\"\n      }\n    }\n  },\n  \"metadata\": {\n    \"property1\": \"string\",\n    \"property2\": \"string\"\n  },\n  \"termsOfService\": {\n    \"token\": \"{{tosToken}}\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token - get accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Account Read token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{individualAccountID}}/profile.read,/accounts/{{businessAccountID}}/profile.read",
+									"description": "Leave blank for all scopes",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Business",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET Business account\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{basePath}}/accounts/{{businessAccountID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{businessAccountID}}"
+							]
+						},
+						"description": "Retrieves the account with the specified ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Individual",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET Individual account\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}"
+							]
+						},
+						"description": "Retrieves the account with the specified ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token - accounts.read & write",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Account Read and Write token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{individualAccountID}}/profile.read,/accounts/{{individualAccountID}}/profile.write",
+									"description": "Leave blank for all scopes",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Individual Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"PATCH Individual account\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{clientId}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{clientSecret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"termsOfService\": {\n        \"token\":\"B1NoEdN_FmxXmZ0IZqhh1igknq2tI_SJVu-vbk78HwTYwbbJysiX4lpYwFD0BKHvKdVLK1qtMqqcbOL2MRQwKCEmuXNcU7L6-aaN91kccx7GhtFXTn7QpPlWIocsqmjTlgbckOb0lv5TxF-rq5BOTtQEzVYyLLwc\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{accountID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{accountID}}"
+							]
+						},
+						"description": "Updates the account of the specified ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token - business account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Business Account Read and Write token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{businessAccountID}}/profile.read,/accounts/{{businessAccountID}}/profile.write,/accounts/{{businessAccountID}}/representatives.read,/accounts/{{businessAccountID}}/representatives.write",
+									"description": "View full list of scopes here: https://docs.moov.io/guides/developer-tools/api-keys/scopes/",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Representative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create representative\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"representativeID\", pm.response.json().representativeID)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": {\n    \"firstName\": \"Amanda\",\n    \"middleName\": \"Amanda\",\n    \"lastName\": \"Yang\",\n    \"suffix\": \"Jr\"\n  },\n  \"phone\": {\n    \"number\": \"818-555-1212\",\n    \"countryCode\": \"1\"\n  },\n  \"email\": \"amanda@classbooker.dev\",\n  \"address\": {\n    \"addressLine1\": \"123 Main Street\",\n    \"addressLine2\": \"Apt 302\",\n    \"city\": \"Boulder\",\n    \"stateOrProvince\": \"CO\",\n    \"postalCode\": \"80301\",\n    \"country\": \"US\"\n  },\n  \"birthDate\": {\n    \"day\": 9,\n    \"month\": 11,\n    \"year\": 1989\n  },\n  \"governmentID\": {\n    \"ssn\": {\n      \"full\": \"123-45-6789\",\n      \"lastFour\": \"6789\"\n    },\n    \"itin\": {\n      \"full\": \"123-45-6789\",\n      \"lastFour\": \"6789\"\n    }\n  },\n  \"responsibilities\": {\n    \"isController\": false,\n    \"isOwner\": true,\n    \"ownershipPercentage\": 38,\n    \"jobTitle\": \"CEO\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{businessAccountID}}/representatives",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{businessAccountID}}",
+								"representatives"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Representative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET representative\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{basePath}}/accounts/{{businessAccountID}}/representatives/{{representativeID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{businessAccountID}}",
+								"representatives",
+								"{{representativeID}}"
+							]
+						},
+						"description": "Retrieves the account with the specified ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Representative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"PATCH representative\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": {\n        \"firstName\": \"Steve\",\n        \"middleName\": \"J.\",\n        \"lastName\": \"Bartowski\",\n        \"suffix\": \"Jr\"\n    },\n    \"phone\": {\n        \"number\": \"818-555-1212\",\n        \"countryCode\": \"1\"\n    },\n    \"email\": \"amanda@classbooker.dev\",\n    \"address\": {\n        \"addressLine1\": \"123 Main Street\",\n        \"addressLine2\": \"Apt 302\",\n        \"city\": \"Boulder\",\n        \"stateOrProvince\": \"CO\",\n        \"postalCode\": \"80301\",\n        \"country\": \"US\"\n    },\n    \"birthDate\": {\n        \"day\": 9,\n        \"month\": 11,\n        \"year\": 1989\n    },\n    \"governmentID\": {\n        \"ssn\": {\n            \"full\": \"123-45-6789\",\n            \"lastFour\": \"6789\"\n        },\n        \"itin\": {\n            \"full\": \"123-45-6789\",\n            \"lastFour\": \"6789\"\n        }\n    },\n    \"responsibilities\": {\n        \"isController\": false,\n        \"isOwner\": true,\n        \"ownershipPercentage\": 38,\n        \"jobTitle\": \"CEO\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{businessAccountID}}/representatives/{{representativeID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{businessAccountID}}",
+								"representatives",
+								"{{representativeID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Representatives",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET representatives\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(pm.response.json().length).to.be.greaterThan(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{basePath}}/accounts/{{businessAccountID}}/representatives",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{businessAccountID}}",
+								"representatives"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Representative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"DELETE Representative\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountType\": \"individual\",\n  \"displayName\": \"Amanda Yang\",\n  \"profile\": {\n    \"individual\": {\n      \"name\": {\n        \"firstName\": \"Amanda\",\n        \"middleName\": \"Amanda\",\n        \"lastName\": \"Yang\",\n        \"suffix\": \"Jr\"\n      },\n      \"phone\": {\n        \"number\": \"818-555-1212\",\n        \"countryCode\": \"1\"\n      },\n      \"email\": \"amanda@classbooker.dev\",\n      \"address\": {\n        \"addressLine1\": \"123 Main Street\",\n        \"addressLine2\": \"Apt 302\",\n        \"city\": \"Boulder\",\n        \"stateOrProvince\": \"CO\",\n        \"postalCode\": \"80301\",\n        \"country\": \"US\"\n      },\n      \"birthDate\": {\n        \"day\": 9,\n        \"month\": 11,\n        \"year\": 1989\n      },\n      \"governmentID\": {\n        \"ssn\": {\n          \"full\": \"123-45-6789\",\n          \"lastFour\": \"6789\"\n        },\n        \"itin\": {\n          \"full\": \"123-45-6789\",\n          \"lastFour\": \"6789\"\n        }\n      }\n    }\n  },\n  \"metadata\": {\n    \"property1\": \"string\",\n    \"property2\": \"string\"\n  },\n  \"termsOfService\": {\n    \"acceptedDate\": \"2019-08-24T14:15:22Z\",\n    \"acceptedIP\": \"127.0.0.1\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{businessAccountID}}/representatives/{{representativeID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{businessAccountID}}",
+								"representatives",
+								"{{representativeID}}"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				}
+			],
+			"description": "The account end point can be used to update the information related to the account\n"
+		},
+		{
+			"name": "Bank accounts",
+			"item": [
+				{
+					"name": "Create Token - bank accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create bank accounts read and write token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{individualAccountID}}/profile.read,/accounts/{{individualAccountID}}/profile.write,/accounts/{{individualAccountID}}/bank-accounts.read,/accounts/{{individualAccountID}}/bank-accounts.write",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Create bank account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create bank account\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"bankAccountID\", pm.response.json().bankAccountID);",
+									"pm.collectionVariables.set(\"routingNumber\", pm.response.json().routingNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account\": {\n        \"holderName\": \"Amanda Yang\",\n        \"holderType\": \"individual\",\n        \"accountNumber\": \"{{$randomBankAccount}}\",\n        \"bankAccountType\": \"checking\",\n        \"routingNumber\": \"273976369\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/bank-accounts",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"bank-accounts"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "List Bank Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET bank accounts\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"const body = pm.response.json();",
+									"",
+									"if (body.length) {",
+									"    pm.collectionVariables.set(\"bankAccountID\", body[0].bankAccountID);",
+									"    pm.collectionVariables.set(\"routingNumber\", body[0].routingNumber);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/bank-accounts",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"bank-accounts"
+							]
+						},
+						"description": "List all the bank accounts associated with a Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bank Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET bank account\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "x-account-id",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/bank-accounts/{{bankAccountID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"bank-accounts",
+								"{{bankAccountID}}"
+							]
+						},
+						"description": "List all the bank accounts associated with a Moov Account"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Capabilities",
+			"item": [
+				{
+					"name": "Create Token - capabilities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create capabilities read and write token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{individualAccountID}}/profile.read,/accounts/{{individualAccountID}}/profile.write,/accounts/{{individualAccountID}}/capabilities.read,/accounts/{{individualAccountID}}/capabilities.write",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Capabilities Connected Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST request capabilities\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"capabilities\": [\"transfers\", \"send-funds\", \"collect-funds\", \"wallet\"]\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/capabilities",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"capabilities"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "List Capabilities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET list capabilities\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/capabilities",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"capabilities"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Capability",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET capability\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/capabilities/send-funds",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"capabilities",
+								"send-funds"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Unrequest Capability",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"DELETE capability\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/capabilities/send-funds",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"capabilities",
+								"send-funds"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Re-request Capability",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Re-request capability\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"capabilities\": [\"send-funds\"]\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/capabilities",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"capabilities"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Institutions",
+			"item": [
+				{
+					"name": "Create Token - Institutions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create Institutions read token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/fed.read",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Institution",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET institutions\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/institutions/ach/search?routingNumber={{routingNumber}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"institutions",
+								"ach",
+								"search"
+							],
+							"query": [
+								{
+									"key": "routingNumber",
+									"value": "{{routingNumber}}"
+								}
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment Methods",
+			"item": [
+				{
+					"name": "Create Token - Indiv payment-methods",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create payment-methods read token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{individualAccountID}}/profile.read,/accounts/{{individualAccountID}}/profile.write,/accounts/{{individualAccountID}}/payment-methods.read",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token - Biz payment-methods",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create payment-methods read token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{individualAccountID}}/profile.read,/accounts/{{individualAccountID}}/profile.write,/accounts/{{individualAccountID}}/payment-methods.read",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "List Payment Methods",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET payment methods\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const body = pm.response.json();",
+									"",
+									"if (body.length) {",
+									"    pm.collectionVariables.set(\"paymentMethodID1\", body[0].paymentMethodID);    ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/payment-methods",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"payment-methods"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment Method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET payment method\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{individualAccountID}}/payment-methods/{{paymentMethodID1}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{individualAccountID}}",
+								"payment-methods",
+								"{{paymentMethodID1}}"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile Enrichment",
+			"item": [
+				{
+					"name": "Create Token - enrichment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create profile enrichment read token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/profile-enrichment.read",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bank Account Avatar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET Bank account avatar\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/avatars/{{routingNumber}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"avatars",
+								"{{routingNumber}}"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Business Account Avatar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET Business avatar\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/avatars/{{businessAccountID}}",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"avatars",
+								"{{businessAccountID}}"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Enriched Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET profile enrichment\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/enrichment/profile?email=test@moov.io",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"enrichment",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "test@moov.io"
+								}
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wallets",
+			"item": [
+				{
+					"name": "Create Token - wallets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create wallets read token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{accountID}}/wallets.read",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "List Wallets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET wallets\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{basePath}}/accounts/{{accountID}}/wallets",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"accounts",
+								"{{accountID}}",
+								"wallets"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfers",
+			"item": [
+				{
+					"name": "Create Token - transfers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create transfers write token\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.collectionVariables.set(\"token\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "http://local.moov.io",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://local.moov.io",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientId}}",
+									"description": "Public key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"description": "Secret key from the Moov Dashboard / API Keys",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "/accounts/{{accountID}}/transfers.write, /transfers.write",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "",
+									"description": "Audiences are not used or supported in the MVP",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{basePath}}/oauth2/token",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "Creates an account and profile with the specified information"
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer options Source",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST transfer-options 1\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const resp = pm.response.json();",
+									"",
+									"if (resp.sourceOptions) {",
+									"    resp.sourceOptions.forEach(option => {",
+									"        if (option.paymentMethodType === \"ach-debit-fund\") {",
+									"            pm.collectionVariables.set(\"paymentMethodID1\", option.paymentMethodID);",
+									"        }",
+									"    })",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": {\n        \"value\": 654654,\n        \"currency\": \"USD\"\n    },\n    \"source\": {\n        \"accountID\": \"bca792bd-53ac-4886-8670-7cdbbb86eedf\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/transfer-options",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"transfer-options"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer options Destination",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST transfer-options 2\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const resp = pm.response.json();",
+									"",
+									"if (resp.destinationOptions) {",
+									"    resp.destinationOptions.forEach(option => {",
+									"        if (option.paymentMethodType === \"ach-credit-standard\") {",
+									"            pm.collectionVariables.set(\"paymentMethodID2\", option.paymentMethodID);",
+									"        }",
+									"    })",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"source\": {\n    \"paymentMethodID\": \"{{paymentMethodID1}}\"\n  },\n  \"destination\": {\n      \"accountID\": \"c9773fcb-7019-4cfa-9a8c-1964e435d01a\"\n  },\n  \"amount\": {\n    \"currency\": \"USD\",\n    \"value\": 12604\n  }\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/transfer-options",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"transfer-options"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "New Transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Create a transfer\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": {\n        \"value\": 5465,\n        \"currency\": \"USD\"\n    },\n    \"source\": {\n        \"paymentMethodID\": \"{{paymentMethodID1}}\"\n    },\n    \"destination\": {\n        \"paymentMethodID\": \"{{paymentMethodID2}}\"\n    },\n    \"description\": \"yooo\"\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/transfers",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"transfers"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Refund a transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST refund a transfer\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{baseUrl}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Account-ID",
+								"value": "{{accountID}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": {\n        \"value\": 5465,\n        \"currency\": \"USD\"\n    },\n    \"source\": {\n        \"paymentMethodID\": \"{{paymentMethodID1}}\"\n    },\n    \"destination\": {\n        \"paymentMethodID\": \"{{paymentMethodID2}}\"\n    },\n    \"description\": \"yooo\"\n}"
+						},
+						"url": {
+							"raw": "{{basePath}}/transfers/{{cardToWalletTransferID}}/refunds",
+							"host": [
+								"{{basePath}}"
+							],
+							"path": [
+								"transfers",
+								"{{cardToWalletTransferID}}",
+								"refunds"
+							]
+						},
+						"description": "Link a bank account to an existing Moov Account"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "basePath",
+			"value": "https://api.moov.io"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://api.moov.io"
+		},
+		{
+			"key": "clientId",
+			"value": "your API key clientId"
+		},
+		{
+			"key": "clientSecret",
+			"value": "your api key secret"
+		},
+		{
+			"key": "token",
+			"value": "set dynamically"
+		},
+		{
+			"key": "tosToken",
+			"value": "set dynamically"
+		},
+		{
+			"key": "accountID",
+			"value": "your active accountId"
+		},
+		{
+			"key": "individualAccountID",
+			"value": ""
+		},
+		{
+			"key": "foreignID",
+			"value": ""
+		},
+		{
+			"key": "cardToWalletTransferID",
+			"value": "a card to wallet transfer id"
+		},
+		{
+			"key": "paymentMethodID1",
+			"value": ""
+		},
+		{
+			"key": "businessAccountID",
+			"value": ""
+		}
+	]
+}
